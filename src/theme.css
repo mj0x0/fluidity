@@ -1,26 +1,26 @@
 /* Noctalia generated variables - Full M3 Dark Palette */
 :root {
   /* Main UI Surface */
-  --m3-bg: #131410;
-  --m3-on-bg: #e4e3db;
-  --m3-surface-variant: #45483d;
-  --m3-on-surface-variant: #c5c8b9;
+  --m3-bg: #18120c;
+  --m3-on-bg: #eee0d5;
+  --m3-surface-variant: #504539;
+  --m3-on-surface-variant: #d4c4b5;
 
   /* Primary Accents */
-  --m3-primary: #add36f;
-  --m3-on-primary: #223600;
-  --m3-primary-container: #334f00;
+  --m3-primary: #f9bb72;
+  --m3-on-primary: #472a00;
+  --m3-primary-container: #663e00;
 
   /* Secondary/Tertiary */
-  --m3-secondary: #c1caac;
-  --m3-tertiary: #a0d0ca;
-  --m3-on-tertiary: #003733;
+  --m3-secondary: #dfc1a2;
+  --m3-tertiary: #bccd9d;
+  --m3-on-tertiary: #283412;
 
   /* Utility & Feedback */
-  --m3-outline: #8f9285;
+  --m3-outline: #9d8e81;
   --m3-error: #ffb4ab;
 
   /* Interaction states with filters */
-  --m3-hover: #add36f;
-  --m3-on-hover: #223600;
+  --m3-hover: #fbd3a3;
+  --m3-on-hover: #472a00;
 }

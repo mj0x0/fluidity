@@ -8,6 +8,7 @@ import { ColorPicker } from "../../../components/ColorPicker"
 import { Dropdown } from "../../../components/Dropdown"
 import { OptionSlider } from "../../../components/OptionSlider"
 import { OptionTextInput } from "../../../components/OptionTextInput"
+import { ToggleOption } from "../../../components/ToggleOption"
 import { Theme, colorsType, images } from "../../../data/data"
 import {
   StyledSettingsContent,
@@ -168,20 +169,6 @@ export const SettingButtonRow = styled.div`
   display: flex;
   justify-content: space-between;
 `
-const ToggleLabel = styled.label`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  color: var(--default-color);
-  cursor: pointer;
-  user-select: none;
-`
-const ToggleCheckbox = styled.input`
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent-color);
-  cursor: pointer;
-`
 
 const AccordionPreview = ({
   title,
@@ -287,14 +274,11 @@ export const DesignSettings = ({
           <SectionDivider />
 
           <SettingElement>
-            <ToggleLabel>
-              <ToggleCheckbox
-                type="checkbox"
-                checked={!!design.useRandomImage}
-                onChange={e => setUseRandomImage(e.target.checked)}
-              />
-              Random Image
-            </ToggleLabel>
+            <ToggleOption
+              label="Random Image"
+              checked={!!design.useRandomImage}
+              onChange={setUseRandomImage}
+            />
             {!design.useRandomImage && (
               <>
                 <OptionTextInput

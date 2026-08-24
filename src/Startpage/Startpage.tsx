@@ -2,6 +2,8 @@ import { useState } from "react"
 
 import styled from "@emotion/styled"
 
+import { Clock } from "./Clock/Clock"
+import { ExpandToggle } from "./ExpandToggle/ExpandToggle"
 import { LinkContainer } from "./LinkContainer/LinkContainer"
 import { Searchbar } from "./Searchbar/Searchbar"
 import { Settings } from "./Settings/Settings"
@@ -37,6 +39,7 @@ const Image = styled.img`
 
 export const Startpage = () => {
   const [img, setImg] = useState(DesignSettings.getWithFallback().image)
+  const [expandAll, setExpandAll] = useState(false)
 
   return (
     <Wrapper>
@@ -44,9 +47,17 @@ export const Startpage = () => {
         <div>
           <Image src={img} onError={() => setImg(images[0]!.value)} />
         </div>
-        <LinkContainer />
+        <LinkContainer
+          expandAll={expandAll}
+          onExitExpandAll={() => setExpandAll(false)}
+        />
       </StyledStartpage>
       <Searchbar />
+      <Clock />
+      <ExpandToggle
+        active={expandAll}
+        onToggle={() => setExpandAll(value => !value)}
+      />
       <Settings />
     </Wrapper>
   )

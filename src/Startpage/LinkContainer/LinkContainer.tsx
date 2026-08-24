@@ -27,6 +27,11 @@ const LinkItem = styled.a`
     opacity: 0.7;
   }
 
+  /* Hide the underline bars that otherwise leak out of collapsed groups. */
+  [aria-hidden="true"] &::before {
+    display: none;
+  }
+
   :hover,
   :focus {
     color: var(--accent-color2);
@@ -35,9 +40,25 @@ const LinkItem = styled.a`
   }
 `
 
-export const LinkContainer = () => {
+type props = {
+  expandAll?: boolean
+  onExitExpandAll?: () => void
+}
+
+export const LinkContainer = ({
+  expandAll = false,
+  onExitExpandAll,
+}: props) => {
   const [active, setActive] = useState(0)
   const linkGroups = Settings.Links.getWithFallback()
+
+  const isActive = (groupIndex: number) => expandAll || active === groupIndex
+
+  // In expand-all mode, selecting a title collapses back down to that group.
+  const selectGroup = (groupIndex: number) => {
+    setActive(groupIndex)
+    if (expandAll) onExitExpandAll?.()
+  }
 
   const middleMouseHandler = (event: MouseEvent, groupIndex: number) => {
     setActive(groupIndex)
@@ -53,14 +74,14 @@ export const LinkContainer = () => {
       {linkGroups.map((group, groupIndex) => (
         <AccordionGroup
           key={group.title}
-          active={active === groupIndex}
+          active={isActive(groupIndex)}
           title={group.title}
-          onClick={() => setActive(groupIndex)}
+          onClick={() => selectGroup(groupIndex)}
           onMouseDown={e => middleMouseHandler(e, groupIndex)}
         >
           {group.links.map(link => (
             <LinkItem
-              tabIndex={active !== groupIndex ? -1 : undefined}
+              tabIndex={!isActive(groupIndex) ? -1 : undefined}
               key={link.label}
               href={link.value}
             >
